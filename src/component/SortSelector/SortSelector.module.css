@@ -1,0 +1,12 @@
+.sortSelector {
+    display: flex;
+    gap: 5px;
+}
+
+.sortLabel {
+    min-width: 150px;
+}
+
+input {
+    margin-bottom: 5px;
+}

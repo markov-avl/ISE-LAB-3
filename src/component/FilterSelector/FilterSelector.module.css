@@ -1,0 +1,4 @@
+.filterSelector {
+    display: flex;
+    flex-direction: column;
+}

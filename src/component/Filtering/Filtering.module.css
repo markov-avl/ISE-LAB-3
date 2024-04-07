@@ -1,0 +1,9 @@
+.filtering {
+    display: flex;
+    flex-direction: column;
+}
+
+.filterSelectors {
+    display: flex;
+    gap: 20px;
+}
