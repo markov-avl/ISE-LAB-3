@@ -4,7 +4,6 @@ import ISort from "../../interface/ISort";
 import styles from "./Sorting.module.css";
 import SortSelector from "../SortSelector";
 import SortState from "../../enum/SortState";
-import {selector} from "d3";
 
 interface IProps {
     sorts: ISort[];
@@ -27,6 +26,11 @@ export const Sorting: React.FC<IProps> = ({sorts}: IProps) => {
 
     const raiseOrder = (order: number) => {
         if (order > 0) {
+            console.log(sortSelectors.map((selector, i) => {
+                if (i === order) return sortSelectors[order - 1]
+                if (i === order - 1) return sortSelectors[order]
+                return selector
+            }))
             setSortSelectors(sortSelectors.map((selector, i) => {
                 if (i === order) return sortSelectors[order - 1]
                 if (i === order - 1) return sortSelectors[order]
@@ -51,7 +55,7 @@ export const Sorting: React.FC<IProps> = ({sorts}: IProps) => {
             <div className={styles.sortSelectors}>
                 {
                     sortSelectors?.map(({label, fieldName, state}, i) =>
-                        <SortSelector key={`sort-selector-${i}`}
+                        <SortSelector key={`${fieldName}-sort-selector`}
                                       label={label}
                                       fieldName={fieldName}
                                       state={state}

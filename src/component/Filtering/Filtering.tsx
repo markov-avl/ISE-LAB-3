@@ -19,9 +19,9 @@ export const Filtering: React.FC<IProps> = ({data, filters}: IProps) => {
     }
 
     const filterSelectors: IFilterSelector[] = [
-        {label: 'Store ID', values: getValues(data, 'store')},
-        {label: 'Date', values: getValues(data, 'date')},
-        {label: 'Holiday', values: getValues(data, 'holiday')}
+        {label: 'Store ID', fieldName: 'store', values: getValues(data, 'store')},
+        {label: 'Date', fieldName: 'date', values: getValues(data, 'date')},
+        {label: 'Holiday', fieldName: 'holiday', values: getValues(data, 'holiday')}
     ]
 
     return (
@@ -29,8 +29,8 @@ export const Filtering: React.FC<IProps> = ({data, filters}: IProps) => {
             <h2>Filtering</h2>
             <div className={styles.filterSelectors}>
                 {
-                    filterSelectors?.map(({label, values}, i) =>
-                        <FilterSelector key={`filter-selector-${i}`}
+                    filterSelectors?.map(({label, fieldName, values}, i) =>
+                        <FilterSelector key={`${fieldName}-filter-selector`}
                                         label={label}
                                         values={values}/>)
                 }

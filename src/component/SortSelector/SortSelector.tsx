@@ -26,7 +26,7 @@ const SortSelector: React.FC<IProps> = ({label, fieldName, state, order, setStat
                            value={sortState}
                            checked={state === sortState}
                            onClick={() => setState(order, sortState as SortState)}/>
-                    <label>{sortState.toUpperCase()}</label>
+                    <label htmlFor={`${fieldName}-${sortState}`}>{sortState.toUpperCase()}</label>
                 </>)
             }
         </div>
