@@ -1,7 +1,7 @@
 enum SortState {
-    ASC,
-    DESC,
-    DISABLED
+    ASC = 'asc',
+    DESC = 'desc',
+    DISABLED = 'disabled'
 }
 
 export default SortState

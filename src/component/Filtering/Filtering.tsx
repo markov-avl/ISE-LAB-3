@@ -29,8 +29,8 @@ export const Filtering: React.FC<IProps> = ({data, filters}: IProps) => {
             <h2>Filtering</h2>
             <div className={styles.filterSelectors}>
                 {
-                    filterSelectors?.map(({label, values}, key) =>
-                        <FilterSelector key={`filter-selector-${key}`}
+                    filterSelectors?.map(({label, values}, i) =>
+                        <FilterSelector key={`filter-selector-${i}`}
                                         label={label}
                                         values={values}/>)
                 }
