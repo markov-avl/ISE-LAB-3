@@ -1,32 +1,40 @@
 import React from "react";
 import styles from './SortSelector.module.css';
-import SortState from "../../enum/SortState";
 import IData from "../../interface/IData";
+import SortOption from "../../enum/SortOption";
 
 interface IProps {
     label: string;
     fieldName: keyof IData;
-    state: SortState;
+    option: SortOption;
     order: number;
-    setState: (order: number, state: SortState) => void;
+    setOption: (order: number, state: SortOption) => void;
     raiseOrder: (order: number) => void;
     lowerOrder: (order: number) => void;
 }
 
-const SortSelector: React.FC<IProps> = ({label, fieldName, state, order, setState, raiseOrder, lowerOrder}: IProps) => {
+const SortSelector: React.FC<IProps> = ({
+                                            label,
+                                            fieldName,
+                                            option,
+                                            order,
+                                            setOption,
+                                            raiseOrder,
+                                            lowerOrder
+                                        }: IProps) => {
     return (
         <div className={styles.sortSelector}>
             <button onClick={() => raiseOrder(order)}>↑</button>
             <button onClick={() => lowerOrder(order)}>↓</button>
             <span className={styles.sortLabel}>Sort by {label}</span>
             {
-                Object.values(SortState).map(sortState => <>
+                Object.values(SortOption).map(sortOption => <>
                     <input type='radio'
-                           name={`${fieldName}-${sortState}`}
-                           value={sortState}
-                           checked={state === sortState}
-                           onClick={() => setState(order, sortState as SortState)}/>
-                    <label htmlFor={`${fieldName}-${sortState}`}>{sortState.toUpperCase()}</label>
+                           name={`${fieldName}-${sortOption}`}
+                           value={sortOption}
+                           checked={option === sortOption}
+                           onClick={() => setOption(order, sortOption as SortOption)}/>
+                    <label htmlFor={`${fieldName}-${sortOption}`}>{sortOption.toUpperCase()}</label>
                 </>)
             }
         </div>

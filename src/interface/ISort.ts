@@ -1,8 +1,10 @@
 import IData from "./IData";
+import SortOption from "../enum/SortOption";
 
 interface ISort {
-    field: keyof IData;
-    ascending: boolean;
+    label: string;
+    fieldName: keyof IData;
+    option: SortOption;
 }
 
 export default ISort

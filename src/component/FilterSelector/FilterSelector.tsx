@@ -1,15 +1,15 @@
-import React, {useState} from "react";
+import React from "react";
 import styles from './FilterSelector.module.css';
 
 interface IProps {
     label: string;
-    values: string[]
+    values: string[];
+    selectedValues: string[];
+    setSelectedValues: (selectedValues: string[]) => void;
 }
 
-const FilterSelector: React.FC<IProps> = ({label, values}: IProps) => {
-    const [selectedValues, setSelectedValues] = useState<string[]>([])
-
-    const onSelect = (value: string) => {
+const FilterSelector: React.FC<IProps> = ({label, values, selectedValues, setSelectedValues}: IProps) => {
+    const onClick = (value: string) => {
         setSelectedValues(
             selectedValues.includes(value)
                 ? selectedValues.filter(item => item !== value)
@@ -22,9 +22,9 @@ const FilterSelector: React.FC<IProps> = ({label, values}: IProps) => {
             <p>{label}</p>
             <select multiple size={20}>
                 {
-                    values.map(value => <option value={value}
-                                                selected={selectedValues.includes(value)}
-                                                onClick={() => onSelect(value)}>{value}</option>)
+                    values?.map(value => <option value={value}
+                                                 selected={selectedValues.includes(value)}
+                                                 onClick={() => onClick(value)}>{value}</option>)
                 }
             </select>
         </div>

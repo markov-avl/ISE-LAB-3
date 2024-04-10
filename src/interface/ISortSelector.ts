@@ -1,10 +1,10 @@
-import SortState from "../enum/SortState";
+import SortOption from "../enum/SortOption";
 import IData from "./IData";
 
 interface ISortSelector {
     label: string;
     fieldName: keyof IData;
-    state: SortState;
+    option: SortOption;
 }
 
 export default ISortSelector

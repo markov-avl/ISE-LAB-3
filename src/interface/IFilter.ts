@@ -1,7 +1,9 @@
 import IData from "./IData";
 
 interface IFilter {
-    field: keyof IData;
+    label: string;
+    fieldName: keyof IData;
+    values: string[];
     selectedValues: string[];
 }
 
