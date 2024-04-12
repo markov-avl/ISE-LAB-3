@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import styles from './FilterSelector.module.css';
 
 interface IProps {
@@ -9,22 +9,20 @@ interface IProps {
 }
 
 const FilterSelector: React.FC<IProps> = ({label, values, selectedValues, setSelectedValues}: IProps) => {
-    const onClick = (value: string) => {
-        setSelectedValues(
-            selectedValues.includes(value)
-                ? selectedValues.filter(item => item !== value)
-                : [...selectedValues, value]
-        )
+    const onChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        setSelectedValues(Array.from(event.currentTarget.selectedOptions).map(option => option.value))
     }
 
     return (
         <div className={styles.filterSelector}>
             <p>{label}</p>
-            <select multiple size={20}>
+            <select multiple size={20} onChange={onChange}>
                 {
-                    values?.map(value => <option value={value}
-                                                 selected={selectedValues.includes(value)}
-                                                 onClick={() => onClick(value)}>{value}</option>)
+                    (values || []).map(value =>
+                        <option value={value}
+                                selected={selectedValues.includes(value)}>
+                            {value}
+                        </option>)
                 }
             </select>
         </div>

@@ -8,7 +8,7 @@ interface IProps {
     setFilters: (filters: IFilter[]) => void;
 }
 
-export const Filtering: React.FC<IProps> = ({filters, setFilters}: IProps) => {
+const Filtering: React.FC<IProps> = ({filters, setFilters}: IProps) => {
     const setSelectedValues = (label: string, selectedValues: string[]) => {
         setFilters(filters.map(filter => {
             if (filter.label === label) return {...filter, selectedValues: selectedValues}
@@ -32,3 +32,5 @@ export const Filtering: React.FC<IProps> = ({filters, setFilters}: IProps) => {
         </div>
     )
 }
+
+export default Filtering

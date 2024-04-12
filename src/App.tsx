@@ -1,11 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import * as d3 from "d3";
 import './App.css';
-import IData from "./interface/IData";
 import IFilter from "./interface/IFilter";
 import ISort from "./interface/ISort";
+import IData from './interface/IData';
 import SortOption from "./enum/SortOption";
 import Parameters from "./component/Parameters";
+import Table from "./component/Table";
 
 const App: React.FC = () => {
     const [data, setData] = useState<IData[]>([])
@@ -48,6 +49,9 @@ const App: React.FC = () => {
                         setFilters={setFilters}
                         sorts={sorts}
                         setSorts={setSorts}/>
+            <Table data={data}
+                   filters={filters}
+                   sorts={sorts}/>
         </div>
     )
 }

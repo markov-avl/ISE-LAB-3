@@ -9,7 +9,7 @@ interface IProps {
     setSorts: (sorts: ISort[]) => void;
 }
 
-export const Sorting: React.FC<IProps> = ({sorts, setSorts}: IProps) => {
+const Sorting: React.FC<IProps> = ({sorts, setSorts}: IProps) => {
     const setOption = (order: number, option: SortOption) => {
         setSorts(sorts.map((sort, index) => {
             if (index === order) return {...sort, option: option}
@@ -56,3 +56,5 @@ export const Sorting: React.FC<IProps> = ({sorts, setSorts}: IProps) => {
         </div>
     )
 }
+
+export default Sorting
