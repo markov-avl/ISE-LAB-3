@@ -44,6 +44,7 @@ const TableContent: React.FC<IProps> = ({data, filters, sorts, content, connectF
             )
             // @ts-ignore
             .html(row => <TableRow data={row}/>)
+        
         drawFauxDOM()
     }, [data, filters, sorts, connectFauxDOM, drawFauxDOM])
 
