@@ -3,6 +3,7 @@ import styles from "./Sorting.module.css";
 import ISort from "../../interface/ISort";
 import SortOption from "../../enum/SortOption";
 import SortSelector from "../SortSelector";
+import ClearButton from "../ClearButton";
 
 interface IProps {
     sorts: ISort[];
@@ -37,6 +38,10 @@ const Sorting: React.FC<IProps> = ({sorts, setSorts}: IProps) => {
         }
     }
 
+    const clearSorts = () => {
+        setSorts(sorts.map(sort => ({...sort, option: SortOption.DISABLED})))
+    }
+
     return (
         <div className={styles.sorting}>
             <h2>Sorting</h2>
@@ -53,6 +58,8 @@ const Sorting: React.FC<IProps> = ({sorts, setSorts}: IProps) => {
                                       lowerOrder={lowerOrder}/>)
                 }
             </div>
+            <ClearButton label={'Clear sorting'}
+                         onClick={clearSorts}/>
         </div>
     )
 }

@@ -1,19 +1,19 @@
-import React, {useEffect} from "react";
+import React, {ReactElement, useEffect} from "react";
+import {ReactFauxDomProps, withFauxDOM} from 'react-faux-dom'
+import * as d3 from "d3";
 import './TableContent.module.css'
 import IData from "../../interface/IData";
 import IFilter from "../../interface/IFilter";
 import ISort from "../../interface/ISort";
-import * as d3 from "d3";
-import {ReactFauxDomProps, withFauxDOM} from 'react-faux-dom'
-import TableRow from "../TableRow";
 import SortOption from "../../enum/SortOption";
+import TableRow from "../TableRow";
 
 
 interface IProps extends ReactFauxDomProps {
     data: IData[];
     filters: IFilter[];
     sorts: ISort[];
-    content?: any;
+    content?: ReactElement;
 }
 
 const TableContent: React.FC<IProps> = ({data, filters, sorts, content, connectFauxDOM, drawFauxDOM}: IProps) => {
@@ -21,7 +21,7 @@ const TableContent: React.FC<IProps> = ({data, filters, sorts, content, connectF
         const comparators = {
             [SortOption.ASC]: d3.ascending,
             [SortOption.DESC]: d3.descending,
-            [SortOption.DISABLED]: (a: any, b: any) => 0,
+            [SortOption.DISABLED]: () => 0
         }
         const faux = connectFauxDOM('tbody', 'content')
 
@@ -33,9 +33,10 @@ const TableContent: React.FC<IProps> = ({data, filters, sorts, content, connectF
             .selectAll('tr')
             .data(data)
             .join('tr')
-            .filter(row => filters.every(({fieldName, selectedValues}) =>
-                selectedValues.length === 0 || selectedValues.includes(row[fieldName].toString())
-            ))
+            .filter(row => filters
+                .filter(({selectedValues}) => selectedValues.length)
+                .every(({fieldName, selectedValues}) => selectedValues.includes(row[fieldName].toString()))
+            )
             .sort((a, b) => sorts
                 .filter(({option}) => option !== SortOption.DISABLED)
                 .map(({fieldName, option}) => comparators[option](a[fieldName], b[fieldName]))

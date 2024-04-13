@@ -2,6 +2,7 @@ import React from "react";
 import FilterSelector from "../FilterSelector";
 import styles from "./Filtering.module.css"
 import IFilter from "../../interface/IFilter";
+import ClearButton from "../ClearButton";
 
 interface IProps {
     filters: IFilter[];
@@ -14,6 +15,10 @@ const Filtering: React.FC<IProps> = ({filters, setFilters}: IProps) => {
             if (filter.label === label) return {...filter, selectedValues: selectedValues}
             return filter
         }))
+    }
+
+    const clearFilters = () => {
+        setFilters(filters.map(filter => ({...filter, selectedValues: []})))
     }
 
     return (
@@ -29,6 +34,8 @@ const Filtering: React.FC<IProps> = ({filters, setFilters}: IProps) => {
                                         setSelectedValues={selectedValues => setSelectedValues(label, selectedValues)}/>)
                 }
             </div>
+            <ClearButton label={'Clear filtering'}
+                         onClick={clearFilters}/>
         </div>
     )
 }
