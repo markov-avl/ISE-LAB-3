@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Parameters.module.css";
+import styles from "./TableParameters.module.css";
 import IFilter from "../../interface/IFilter";
 import ISort from "../../interface/ISort";
 import Filtering from "../Filtering";
@@ -14,7 +14,7 @@ interface IProps {
 }
 
 
-const Parameters: React.FC<IProps> = ({filters, setFilters, sorts, setSorts}: IProps) => {
+const TableParameters: React.FC<IProps> = ({filters, setFilters, sorts, setSorts}: IProps) => {
     return (
         <div className={styles.parameterization}>
             <Filtering filters={filters}
@@ -25,4 +25,4 @@ const Parameters: React.FC<IProps> = ({filters, setFilters, sorts, setSorts}: IP
     )
 }
 
-export default Parameters
+export default TableParameters
